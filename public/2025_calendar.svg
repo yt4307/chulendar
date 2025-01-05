@@ -6,8 +6,15 @@
         fill: #f0d069;
       }
 
+      @font-face {
+        font-family: 'GumiRomance';
+        src: url('/app/fonts/GumiRomance.otf') format('otf'),
+        font-weight: normal;
+        font-style: normal;
+      }
+
       .cls-1, .cls-2 {
-        font-family: GumiRomanceTTF, 'Gumi Romance TTF';
+        font-family: GumiRomance;
         font-size: 100px;
       }
 
