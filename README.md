@@ -92,21 +92,7 @@ const calendarData2025 = {
 1월 캘린더
 ![january_page](./january_page.png)
 
-🖋️ Customization
-캐릭터 이미지 변경:
-
-/public/images 디렉토리에 이미지를 추가하고 CalendarPage의 Character 경로를 수정합니다.
-폰트 변경:
-
-/public/fonts 디렉토리에 새로운 폰트를 추가하고 GlobalStyles.ts를 업데이트합니다.
-
-🤝 Contributing
-
-1. Fork this repository
-2. Create a branch (git checkout -b feature/my-feature)
-3. Commit your changes (git commit -m 'Add some feature')
-4. Push to the branch (git push origin feature/my-feature)
-5. Open a pull request
+---
 
 📜 License
-MIT License. See LICENSE for more information.
+MIT License
