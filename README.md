@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 2025 Calendar Project
 
-## Getting Started
+2025 Calendar Project는 2025년을 기준으로 월별 캘린더를 제공하는 웹 애플리케이션입니다.  
+Next.js와 Styled-Components를 사용하여 개발되었으며, 깔끔하고 직관적인 사용자 경험을 제공합니다.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📚 **Features**
+
+- **월별 캘린더**: 2025년의 모든 월(1월~12월)에 대한 캘린더 제공
+- **재사용 가능한 컴포넌트**: `CalendarPage`를 사용하여 모든 월에 대해 동적 생성
+- **반응형 디자인**: 다양한 디바이스 크기에 적응
+- **캐릭터 이미지**: 각 캘린더 페이지에 고유한 테마와 캐릭터 포함
+- **경쾌한 스타일**: 밝고 친근한 디자인으로 사용자 경험 강화
+
+---
+
+## 🚀 **Tech Stack**
+
+- **Framework**: [Next.js 14](https://nextjs.org/) - 최신 Next.js 기능 활용
+- **Styling**: [Styled-Components](https://styled-components.com/) - CSS-in-JS 스타일링
+- **Language**: TypeScript - 타입 안정성을 위한 선택
+
+---
+
+## 📂 **Folder Structure**
+
+```text
+/src
+├── /components
+│ ├── CalendarPage.tsx # 재사용 가능한 캘린더 컴포넌트
+│ ├── CalendarTitle.tsx # 캘린더 제목 컴포넌트
+├── /app
+│ ├── /fonts # 프로젝트에서 사용하는 폰트
+│ ├── page.tsx # 캘린더를 띄우는 루트 페이지
+│ └── layout.tsx # styled-components를 적용하는 루트 레이아웃
+├── /public # 캐릭터 이미지 및 기타 리소스
+├── /styles
+│ └── GlobalStyles.ts # 전역 스타일 정의
+└── /fonts # 프로젝트에서 사용하는 폰트
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ **Setup Instructions**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. **Clone the repository**
 
-## Learn More
+```bash
+git clone https://github.com/your-username/2025-calendar.git
+cd 2025-calendar
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 2. Install dependencies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+yarn
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Run the development server
 
-## Deploy on Vercel
+```bash
+yarn dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🗓️ How It Works
+
+### 월별 캘린더 생성
+
+CalendarPage는 monthNumber(1~12)를 받아, 자동으로 해당 월의 날짜와 시작 요일을 설정합니다.
+2025년의 데이터는 다음과 같이 고정되어 있습니다:
+
+```ts
+const calendarData2025 = {
+  1: { daysInMonth: 31, firstDayOfWeek: 3 },
+  2: { daysInMonth: 28, firstDayOfWeek: 6 },
+  ...
+  12: { daysInMonth: 31, firstDayOfWeek: 1 },
+};
+```
+
+모든 월은 반응형 그리드로 정렬되며, 간단한 스타일링이 추가되었습니다.
+
+---
+
+📸 Screenshots
+메인페이지
+![main_page](./main_page.png)
+
+1월 캘린더
+![january_page](./january_page.png)
+
+🖋️ Customization
+캐릭터 이미지 변경:
+
+/public/images 디렉토리에 이미지를 추가하고 CalendarPage의 Character 경로를 수정합니다.
+폰트 변경:
+
+/public/fonts 디렉토리에 새로운 폰트를 추가하고 GlobalStyles.ts를 업데이트합니다.
+
+🤝 Contributing
+
+1. Fork this repository
+2. Create a branch (git checkout -b feature/my-feature)
+3. Commit your changes (git commit -m 'Add some feature')
+4. Push to the branch (git push origin feature/my-feature)
+5. Open a pull request
+
+📜 License
+MIT License. See LICENSE for more information.
