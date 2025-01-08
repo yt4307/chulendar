@@ -73,7 +73,7 @@ export default function CalendarPage({ monthNumber }: CalendarPageProps) {
   );
 }
 
-// 스타일 정의 (기존 스타일 그대로 사용)
+// 스타일 정의 (반응형 적용)
 const Container = styled.div`
   position: relative;
   width: 100vw;
@@ -102,6 +102,14 @@ const CalendarContainer = styled.div`
   width: calc(100% - 80px);
   height: calc(100% - 80px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 20px 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 15px 5px;
+  }
 `;
 
 const WeekHeader = styled.div`
@@ -116,7 +124,15 @@ const WeekHeader = styled.div`
 const Weekday = styled.div`
   padding: 10px 0;
   font-family: var(--font-gumi-romance);
-  font-size: 3.4rem;
+  font-size: 2.4rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const DaysGrid = styled.div`
@@ -135,12 +151,20 @@ const Day = styled.div`
   text-align: center;
   color: #a97443;
   font-family: var(--font-gumi-romance);
-  font-size: 3.4rem;
+  font-size: 2.4rem;
   font-weight: bold;
 
   &:hover {
     background: #fff;
     cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
   }
 `;
 
@@ -150,4 +174,8 @@ const CharacterContainer = styled.div`
   right: 80px;
   width: 200px;
   height: auto;
+
+  @media (max-width: 768px) {
+    width: 130px;
+  }
 `;
