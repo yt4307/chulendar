@@ -20,26 +20,52 @@ export default function Home() {
           setCurrentPage((prev) => prev - 1);
         }
       }, 1000),
-    [currentPage, totalPages] // 의존성 배열에 currentPage와 totalPages 포함
+    [currentPage, totalPages]
   );
 
   // 키보드 방향키 이벤트 핸들러
   const handleKeydown = useMemo(
     () => (e: KeyboardEvent) => {
       if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-        // 오른쪽 또는 아래 방향키: 다음 페이지
         if (currentPage < totalPages - 1) {
           setCurrentPage((prev) => prev + 1);
         }
       } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-        // 왼쪽 또는 위 방향키: 이전 페이지
         if (currentPage > 0) {
           setCurrentPage((prev) => prev - 1);
         }
       }
     },
-    [currentPage, totalPages] // 의존성 배열 유지
+    [currentPage, totalPages]
   );
+
+  // 모바일 스와이프 이벤트 핸들러
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchEndX, setTouchEndX] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEndX(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX !== null && touchEndX !== null) {
+      const deltaX = touchStartX - touchEndX;
+
+      if (deltaX > 50 && currentPage < totalPages - 1) {
+        // 왼쪽으로 스와이프 → 다음 페이지
+        setCurrentPage((prev) => prev + 1);
+      } else if (deltaX < -50 && currentPage > 0) {
+        // 오른쪽으로 스와이프 → 이전 페이지
+        setCurrentPage((prev) => prev - 1);
+      }
+    }
+    setTouchStartX(null);
+    setTouchEndX(null);
+  };
 
   // 이벤트 리스너 등록
   useEffect(() => {
@@ -50,10 +76,14 @@ export default function Home() {
       window.removeEventListener("wheel", handleScroll);
       window.removeEventListener("keydown", handleKeydown);
     };
-  }, [handleScroll, handleKeydown]); // 의존성 배열 유지
+  }, [handleScroll, handleKeydown]);
 
   return (
-    <Wrapper>
+    <Wrapper
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <PagesContainer $currentPage={currentPage}>
         <PageWrapper>
           <CoverPage />
@@ -85,7 +115,7 @@ const PagesContainer = styled.div.withConfig({
 })<PagesContainerProps>`
   display: flex;
   flex-direction: row;
-  width: 300vw; /* 페이지 수에 맞게 설정 */
+  width: 1300vw; /* 페이지 수에 맞게 설정 (13 페이지) */
   height: 100vh;
   transition: transform 0.8s ease-in-out; /* 부드러운 전환 효과 */
 
